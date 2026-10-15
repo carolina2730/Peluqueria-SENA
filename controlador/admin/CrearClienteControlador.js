@@ -2,7 +2,7 @@ const modelo = require('../../modelo/admin/CrearClienteModelo');
 class CrearClienteControlador {
      // funcion crear nuevo cliente
     static async crearCliente(req, res) {
-        const { t1: tipoD, t2: numeroD, t3: nombres, t4: direccion, t5: telefono, t6: email, t7: contrasena } = req.body;
+        const { t1: tipoD, t2: numeroD, t3: nombres, t4: direccion, t5: telefono, t6: email, t7: contrasena} = req.body;
         // ------------👁️‍🗨️ validaciones👁️‍🗨️----------------
         // Validar campos vacíos❓❓❓❓❓----------------
         const errorCampos = CrearClienteControlador.verCampos(tipoD, numeroD, nombres, direccion, telefono, email, contrasena);
@@ -44,9 +44,8 @@ class CrearClienteControlador {
         if (errorkey) {
             return res.status(400).json({ error: errorkey });
         }
-
          try {
-            const result = await modelo.CrearClientes(tipoD,numeroD, nombres, telefono, email, contrasena);
+            const result = await modelo.crearCliente(tipoD,numeroD, nombres, direccion, telefono, email, contrasena);
             res.status(201).json({ mensaje: 'cliente creado con exito', id: result.insertId });
         } catch (err) {
             if (err.message.includes("Duplicate entry")) {
